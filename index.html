@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishu Kumar Jha | AI Product Developer</title>
+    
+    <!-- Google Fonts: Inter for a professional, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /*
+        ========================================
+        --- 1. GLOBAL STYLES & CORPORATE THEME ---
+        ========================================
+   
+        */
+        :root {
+            --bg-color: #111827;         /* Dark charcoal/navy background */
+            --card-color: #1f2937;        /* Lighter gray for cards */
+            --primary-color: #3b82f6;    /* A professional, accessible blue */
+            --text-color: #d1d5db;       /* Light gray for high readability */
+            --heading-color: #ffffff;    /* Pure white for headings */
+            --border-color: #374151;      /* Subtle border color */
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Underline effect for headings, now a solid primary color */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*
+        ==================================
+        --- 2. HOME SECTION (3D HERO) ---
+        ==================================
+        */
+        #home {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem; /* Add padding for smaller screens */
+            /* Vanta.js "NET" animation will attach here */
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--heading-color); /* Solid color, no gradient */
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-content .tagline {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        /*
+        ===========================
+        --- 3. ABOUT ME SECTION ---
+        ===========================
+        */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 250px; /* Text left, image right */
+            gap: 3rem;
+            align-items: center;
+        }
+
+        #about-photo {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%; /* Classic circular shape */
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text .highlight {
+            font-weight: 600;
+            color: var(--primary-color); /* Solid primary color highlight */
+        }
+
+        .about-socials a {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .about-socials svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text-color);
+            transition: fill 0.3s, transform 0.3s;
+        }
+
+        .about-socials a:hover svg {
+            fill: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /*
+        ========================
+        --- 4. SKILLS SECTION ---
+        ========================
+        */
+        #skills {
+            background-color: var(--card-color);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .skill-item {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .skill-item:hover {
+            background-color: var(--primary-color);
+            color: var(--heading-color);
+        }
+
+        /*
+        =========================
+        --- 5. PROJECTS SECTION ---
+        =========================
+        */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+       .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+    display: block;           /* Prevents extra bottom whitespace */
+    background-color: #000;   /* fallback in case image is transparent */
+}
+
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--heading-color);
+            font-weight: 500;
+            background-color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .project-link:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+        }
+
+        /*
+        =========================
+        --- 6. CONTACT SECTION ---
+        =========================
+        */
+        #contact {
+             background-color: var(--card-color);
+             border-top: 1px solid var(--border-color);
+             border-bottom: 1px solid var(--border-color);
+        }
+
+        #contact-form {
+            max-width: 700px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        #contact-form input, #contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        #contact-form input:focus, #contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--heading-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            align-self: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #2563eb;
+        }
+
+        /*
+        ========================
+        --- 7. FOOTER SECTION ---
+        ========================
+        */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-socials {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-socials a {
+            margin: 0 0.75rem;
+        }
+        
+        .footer-socials svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--text-color);
+            transition: fill 0.3s, transform 0.3s;
+        }
+        
+        .footer-socials a:hover svg {
+            fill: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /*
+        ===============================
+        --- 8. RESPONSIVE STYLES ---
+        ===============================
+        * Adjustments for tablet and mobile devices.
+        */
+        @media (max-width: 992px) {
+            /* Tablet adjustments */
+            .about-content {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile adjustments */
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            h2 { font-size: 2.2rem; }
+            
+            .hero-content h1 { 
+                font-size: 3rem;
+                line-height: 1.2;
+            }
+            .hero-content .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr; /* Stack on mobile */
+                text-align: center;
+            }
+
+            #about-photo {
+                margin: 0 auto 2rem;
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HOME -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>Rishu Kumar Jha</h1>
+            <p class="tagline">AI Product Developer</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT ME -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm an <span class="highlight">AI and Machine Learning Product Developer</span> passionate about building intelligent, user-centric solutions from complex data. My expertise covers the full ML project lifecycle, from ideation and model development to deployment. I thrive at the intersection of data science, software engineering, and product vision to create impactful AI products.
+                    </p>
+                    <div class="about-socials">
+                        <!-- 💡 Replace '#' with your LinkedIn profile URL -->
+                        <a href="https://www.linkedin.com/in/rishu-kumar-jha-0637a7325/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                        </a>
+                        <!-- 💡 Replace '#' with your GitHub profile URL -->
+                        <a href="https://github.com/Rishujha098" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <img id="about-photo" src="my pic.jpg" alt="Rishu Kumar Jha">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Web Development</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">Pandas & NumPy</div>
+                <div class="skill-item">SQL & NoSQL</div>
+                <div class="skill-item">Graphic Designing</div>
+                 <div class="skill-item">UI/UX Designing</div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="project 1.png" alt="Customer Churn Prediction" class="project_img">
+                    <div class="project-content">
+                        <h3>Captionify–AI Captions</h3>
+                        <p>Built a web app using Google’s Gemini Vision API to generate smart image captions.
+                         Used HTML, Tailwind CSS, and JavaScript for seamless frontend and API integration.
+                         Showcases real-time multimodal AI interaction.</p>
+                        <a href="https://captionfy.netlify.app/" target="_blank" rel="noopener noreferrer"class="project-link" >View</a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/400x250/3b82f6/FFFFFF?text=Project+2" alt="Sentiment Analysis Tool">
+                    <div class="project-content">
+                        <h3> Under Development</h3>
+                        <!-- <p>this is project 2 description.</p> -->
+                        <!-- <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View </a> -->
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/400x250/3b82f6/FFFFFF?text=Project+3" alt="Sales Forecasting System">
+                    <div class="project-content">
+                        <h3> Under Development</h3>
+                        <!-- <p>this is project 3 description.</p> -->
+                        <!-- <a href="#" target="_blank" rel="noopener noreferrer" class="project-link">View</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <!-- SECTION 5: CONTACT -->
+<form id="contact-form">
+  <input type="text" name="name" required placeholder="Your Name" />
+  <input type="email" name="email" required placeholder="Your Email" />
+  <textarea name="message" required placeholder="Your Message"></textarea>
+  <button type="submit" class="submit-btn">Send Message</button>
+</form>
+
+<script>
+  document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const response = await fetch("https://formspree.io/f/xovlnqen", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (response.ok) {
+      window.location.href = "thanks.html"; // ✅ redirect here
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+
+
+    <!-- SECTION 6: FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-socials">
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                </a>
+            </div>
+            <p>&copy; 2025 Rishu Kumar Jha. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LIBRARIES & CUSTOM SCRIPT -->
+
+    <!-- Three.js - Required dependency for Vanta.js. Using a known compatible version. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    
+    <!-- Vanta.js - Using the "NET" effect for a robotic, circuitry feel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+
+    <script>
+        // --- SCRIPT 1: 3D NET BACKGROUND ---
+        // Initializes the Vanta.js animation on the #home section.
+        VANTA.NET({
+            el: "#home",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,      // Corresponds to --primary-color (Corporate Blue)
+            backgroundColor: 0x111827, // Corresponds to --bg-color (Dark Navy)
+            points: 12.00,
+            maxDistance: 25.00,
+            spacing: 18.00
+        });
+
+        // --- SCRIPT 2: SCROLL-BASED FADE-IN ANIMATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                // The first section is animated on load, so we don't need to observe it.
+                if (section.id !== 'home') {
+                    observer.observe(section);
+                } else {
+                    section.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
